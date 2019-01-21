@@ -16,9 +16,12 @@ for list in ${LIST[*]}
 	       git push origin $list
 		fly -t cc sp -p $list -c ./ci/$list.yml -l ./ci/credentials.yml -n
 		fly -t cc up -p $list
+		git add ./ci/tasks/$list*
+		git commit -m "add merge file"
+		git push origin $list
 
-		git checkout staging
-		git pull origin $list
-		git push origin staging
+#		git checkout staging
+#		git pull origin $list
+#		git push origin staging
 done
 
